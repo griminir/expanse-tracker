@@ -3,47 +3,52 @@ import ExpenseList from './components/ExpenseList';
 import ExpenseFilter from './components/ExpenseFilter';
 import ExpenseForm from './components/ExpenseForm';
 
-export const categories = ['Fun', 'Regninger', 'Mat', 'Ukjent', 'Transport'];
-
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [expenses, setExpenses] = useState([
     {
-      Id: 1,
-      Description: 'legobil',
-      Cost: 30,
-      Catogory: 'fun',
+      id: 1,
+      description: 'legobil',
+      cost: 30,
+      category: 'fun',
     },
     {
-      Id: 2,
-      Description: 'rema 100',
-      Cost: 600,
-      Catogory: 'mat',
+      id: 2,
+      description: 'rema 100',
+      cost: 600,
+      category: 'mat',
     },
     {
-      Id: 3,
-      Description: 'fotball',
-      Cost: 30,
-      Catogory: 'fun',
+      id: 3,
+      description: 'fotball',
+      cost: 30,
+      category: 'fun',
     },
     {
-      Id: 4,
-      Description: 'strøm',
-      Cost: 300,
-      Catogory: 'regninger',
+      id: 4,
+      description: 'strøm',
+      cost: 300,
+      category: 'regninger',
     },
   ]);
 
   const visibleExpenses = selectedCategory
     ? expenses.filter(
-        (e) => e.Catogory.toLowerCase() === selectedCategory.toLowerCase()
+        (e) => e.category.toLowerCase() === selectedCategory.toLowerCase()
       )
     : expenses;
 
   return (
     <>
-      <div className="mb-5">
-        <ExpenseForm />
+      <div className='mb-5'>
+        <ExpenseForm
+          onSubmit={(newExpense) =>
+            setExpenses([
+              ...expenses,
+              { ...newExpense, id: expenses.length + 1 },
+            ])
+          }
+        />
       </div>
       <div className='mb-3'>
         <ExpenseFilter
@@ -52,7 +57,7 @@ function App() {
       </div>
       <ExpenseList
         expenses={visibleExpenses}
-        onDelete={(Id) => setExpenses(expenses.filter((e) => e.Id !== Id))}
+        onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
       />
     </>
   );
