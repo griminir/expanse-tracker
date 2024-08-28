@@ -1,7 +1,7 @@
 interface Expanse {
   Id: number;
   Description: string;
-  Price: number;
+  Cost: number;
   Catogory: string;
 }
 
@@ -17,7 +17,7 @@ const ExpenseList = ({ expenses, onDelete }: Props) => {
       <thead>
         <tr>
           <th>Description</th>
-          <th>Price</th>
+          <th>Cost</th>
           <th>Catogory</th>
           <th></th>
         </tr>
@@ -26,7 +26,7 @@ const ExpenseList = ({ expenses, onDelete }: Props) => {
         {expenses.map((expenses) => (
           <tr key={expenses.Id}>
             <td>{expenses.Description}</td>
-            <td>{expenses.Price}</td>
+            <td>{expenses.Cost}</td>
             <td>{expenses.Catogory}</td>
             <td>
               <button
@@ -45,7 +45,7 @@ const ExpenseList = ({ expenses, onDelete }: Props) => {
           <td>
             NOK
             {expenses
-              .reduce((acc, expenses) => expenses.Price + acc, 0)
+              .reduce((acc, expenses) => expenses.Cost + acc, 0)
               .toFixed(2)}
           </td>
           <td></td>
